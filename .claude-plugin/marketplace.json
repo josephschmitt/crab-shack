@@ -1,0 +1,13 @@
+{
+  "name": "joes-crab-shack",
+  "owner": {
+    "name": "Joe Schmitt",
+    "email": "ai@joe.sh"
+  },
+  "metadata": {
+    "description": "Joe's personal Claude plugin marketplace",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": []
+}
