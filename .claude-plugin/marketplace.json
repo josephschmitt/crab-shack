@@ -7,5 +7,16 @@
   "metadata": {
     "description": "Joe's personal Claude plugin marketplace"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "code-handoff",
+      "source": "plugins/code-handoff",
+      "description": "Packages the current conversation into a handoff document for a fresh coding agent session."
+    },
+    {
+      "name": "copy-editor",
+      "source": "plugins/copy-editor",
+      "description": "Takes an editorial pass on existing prose to improve clarity and flow while preserving the author's voice."
+    }
+  ]
 }
