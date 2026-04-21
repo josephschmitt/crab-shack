@@ -9,7 +9,7 @@ This is where Joe keeps his custom skills, plugins, and agents for Claude Code.
 Install this marketplace in Claude Code:
 
 ```bash
-claude plugin marketplace add https://github.com/josephschmitt/joes-crab-shack
+claude plugin marketplace add https://github.com/josephschmitt/crab-shack
 ```
 
 ## What's Inside
