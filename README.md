@@ -1,8 +1,6 @@
 # Joe's Crab Shack 🦀
 
-A personal Claude plugin marketplace. Because crabs belong in shacks.
-
-This is where Joe keeps his custom skills, plugins, and agents for Claude Code.
+Because crabs belong in shacks. A personal Claude plugin marketplace.
 
 ## Usage
 
