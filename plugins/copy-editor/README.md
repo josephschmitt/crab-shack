@@ -6,7 +6,13 @@ Takes an editorial pass on existing prose to improve clarity, conciseness, and f
 
 ## Install
 
+### Claude Code
+
 ```
 /plugin marketplace add josephschmitt/crab-shack
 /plugin install copy-editor@joes-crab-shack
 ```
+
+### Claude.ai (web or desktop)
+
+Download [`copy-editor.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/copy-editor.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.

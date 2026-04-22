@@ -6,7 +6,13 @@ Packages the current conversation into a structured handoff document for a fresh
 
 ## Install
 
+### Claude Code
+
 ```
 /plugin marketplace add josephschmitt/crab-shack
 /plugin install code-handoff@joes-crab-shack
 ```
+
+### Claude.ai (web or desktop)
+
+Download [`code-handoff.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/code-handoff.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.
