@@ -17,6 +17,11 @@
       "name": "copy-editor",
       "source": "./plugins/copy-editor",
       "description": "Takes an editorial pass on existing prose to improve clarity and flow while preserving the author's voice."
+    },
+    {
+      "name": "planning-photoshoots",
+      "source": "plugins/planning-photoshoots",
+      "description": "A conversational photography companion that recommends gear loadouts, styles, and practical tips for a shoot based on goals, location, weather, and owned equipment."
     }
   ]
 }
