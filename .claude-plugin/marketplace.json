@@ -20,7 +20,7 @@
     },
     {
       "name": "planning-photoshoots",
-      "source": "plugins/planning-photoshoots",
+      "source": "./plugins/planning-photoshoots",
       "description": "A conversational photography companion that recommends gear loadouts, styles, and practical tips for a shoot based on goals, location, weather, and owned equipment."
     }
   ]
