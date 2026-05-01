@@ -2,14 +2,14 @@
 """Validate SKILL.md files and the marketplace manifest.
 
 Checks, for every plugin directory referenced in `.claude-plugin/marketplace.json`
-and every `plugins/*/SKILL.md` on disk:
+and every `plugins/*/skills/*/SKILL.md` on disk:
 
 - SKILL.md exists at the expected path.
 - YAML frontmatter parses.
 - `name`: present, 1-64 chars, lowercase [a-z0-9-], matches the directory name.
 - `description`: present, 1-1024 chars.
-- Marketplace entries point at directories that exist, and their declared
-  `name` matches the SKILL.md `name`.
+- Marketplace entries point at plugin directories that exist and contain at
+  least one `skills/<name>/SKILL.md`.
 
 Exits non-zero and prints a human-readable report on any failure.
 """
@@ -141,8 +141,9 @@ def validate_marketplace(report: Report) -> dict[str, str]:
         if not source_dir.is_dir():
             report.error(entry_scope, f"source directory `{source}` does not exist")
             continue
-        if not (source_dir / "SKILL.md").exists():
-            report.error(entry_scope, f"source `{source}` has no SKILL.md")
+        skills_dir = source_dir / "skills"
+        if not skills_dir.is_dir() or not any(skills_dir.glob("*/SKILL.md")):
+            report.error(entry_scope, f"source `{source}` has no skills/*/SKILL.md")
             continue
         declared[name] = source
 
@@ -154,9 +155,9 @@ def main() -> int:
 
     declared = validate_marketplace(report)
 
-    skill_files = sorted(PLUGINS_DIR.glob("*/SKILL.md")) if PLUGINS_DIR.is_dir() else []
+    skill_files = sorted(PLUGINS_DIR.glob("*/skills/*/SKILL.md")) if PLUGINS_DIR.is_dir() else []
     if not skill_files:
-        report.error("plugins/", "no SKILL.md files found")
+        report.error("plugins/", "no SKILL.md files found under plugins/*/skills/*/")
 
     seen_names: set[str] = set()
     for skill_md in skill_files:
@@ -167,7 +168,7 @@ def main() -> int:
                 report.error(str(skill_md.relative_to(REPO_ROOT)), f"duplicate skill name '{name}'")
             seen_names.add(name)
 
-    on_disk_names = {p.parent.name for p in skill_files}
+    on_disk_names = {p.parents[2].name for p in skill_files}
     declared_dir_names: set[str] = set()
     for declared_name, source in declared.items():
         source_dir_name = Path(source).name
