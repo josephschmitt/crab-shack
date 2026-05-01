@@ -30,12 +30,14 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist
-          # Zip each plugin as `<name>/...` at the root of the archive,
-          # which is the layout claude.ai expects for skill uploads.
-          for dir in plugins/*/; do
-            name="$(basename "$dir")"
-            [ -f "$dir/SKILL.md" ] || continue
-            (cd plugins && zip -r "../dist/${name}.zip" "$name" -x '*.DS_Store' '*/.DS_Store')
+          # Zip each skill as `<name>/...` at the root of the archive, which
+          # is the layout claude.ai expects for skill uploads. Skill folders
+          # live at plugins/<plugin>/skills/<skill>/.
+          for skill_md in plugins/*/skills/*/SKILL.md; do
+            skill_dir="$(dirname "$skill_md")"
+            parent_dir="$(dirname "$skill_dir")"
+            name="$(basename "$skill_dir")"
+            (cd "$parent_dir" && zip -r "$GITHUB_WORKSPACE/dist/${name}.zip" "$name" -x '*.DS_Store' '*/.DS_Store')
             echo "built dist/${name}.zip"
           done
           ls -la dist/
