@@ -9,6 +9,11 @@
   },
   "plugins": [
     {
+      "name": "call-notes",
+      "source": "./plugins/call-notes",
+      "description": "Turns a raw call or meeting transcript into structured, actionable notes — summary, key points, decisions, action items, follow-ups, and notable details. Supports optional scoring templates."
+    },
+    {
       "name": "code-handoff",
       "source": "./plugins/code-handoff",
       "description": "Packages the current conversation into a handoff document for a fresh coding agent session."
