@@ -5,24 +5,11 @@ description: Turns a raw call or meeting transcript into structured, actionable 
 
 # Call Notes
 
-Turn a raw transcript into the kind of write-up a sharp EA would hand you after sitting in on the call. The goal is reference material the user can scan in 30 seconds, not a polished retelling and not a reformatted transcript.
-
-## What this skill is for
-
-The user records calls (phone, FaceTime, Zoom, in-person) and ends up with a wall of transcript text. They want:
-
-- The substance, organized by topic — not a chronological replay.
-- Decisions, action items, and follow-ups pulled out cleanly so nothing falls through the cracks.
-- Specific details worth remembering — names, numbers, prices, dates, recommendations.
-- Honesty about what's uncertain (who said what, ambiguous commitments, garbled audio).
-
-What this skill is **not**: a cleaned-up transcript, a verbatim summary, or a creative retelling. If the output reads like prose paragraphs about the call, it's wrong.
+Turn a raw call transcript into the kind of write-up a sharp EA would hand you after sitting in on the call: scannable reference material, organized by topic, with decisions and action items pulled out cleanly. Not a cleaned-up transcript, not a verbatim summary, not a creative retelling. If the output reads like prose paragraphs about the call, it's wrong.
 
 ## When to invoke
 
-Trigger when the user pastes a block of transcript text (typically with timestamps, speaker labels like "Speaker 1:", or obvious conversational back-and-forth) and asks for any of: notes, a summary, a write-up, action items, decisions, "what came out of this", or pastes silently with the expectation that the skill will recognize it.
-
-If the input is short (a few lines) or doesn't look like a transcript, ask before processing. Don't assume.
+Trigger when the user pastes a block of transcript text (typically with timestamps, speaker labels like "Speaker 1:", or obvious conversational back-and-forth) and asks for notes, a summary, a write-up, action items, decisions, or "what came out of this" — or pastes silently with the expectation that the skill will recognize it. If the input is short or doesn't look like a transcript, ask before processing.
 
 ## Default output structure
 
@@ -86,7 +73,7 @@ The catch-all for specifics worth keeping: a contractor's name and phone number,
 
 ### Follow-ups
 
-Things that need to happen next that aren't owned action items — pending information, scheduled next steps, "we'll circle back after she hears from her sister." If there's an obvious next conversation or milestone, name it.
+Things that need to happen next that aren't owned action items — pending information, scheduled next steps, "we'll circle back after she hears from her sister." If there's an obvious next call or milestone, name it.
 
 ### Open questions
 
@@ -145,6 +132,48 @@ After drafting the notes, run through:
 5. **Are speaker attributions honest?** No invented names, no over-confident guesses on "Speaker 1 vs Speaker 2."
 
 If any check fails, fix before outputting.
+
+## Example
+
+A 30-minute call with a contractor about a kitchen estimate produces notes like this:
+
+````markdown
+# Call with Mike Reyes re: kitchen reno estimate (May 2)
+
+## Summary
+30-minute call with Mike Reyes (Reyes Construction) walking through the kitchen scope. Mike quoted $42K for the base bid with a 6-8 week lead time once signed. Decision pending after Sarah reviews the line items this weekend.
+
+## Key points
+- Scope: full gut, new cabinets, quartz counters, keep existing footprint
+- Mike pushed back on relocating the sink — would add ~$3K for plumbing rerouting
+- Two cabinet options: Shaker (in-budget) vs. inset (+$4K)
+- Permit timeline is the long pole — town is running 3-4 weeks on kitchen permits
+
+## Decisions made
+- Keep the existing sink location to stay in budget
+- Quartz over butcher block for counters (durability with two kids)
+
+## Action items
+- **Mike** — send itemized line-item bid by Friday (May 5)
+- **Mike** — send three recent kitchen references with photos
+- **Joe** — review line items with Sarah over the weekend
+- **Joe** — confirm cabinet choice (Shaker vs. inset) by Monday
+
+## Notable details
+- Mike Reyes, Reyes Construction, (508) 555-0142
+- Base bid: $42,000. Inset cabinet upgrade: +$4,000. Sink relocation: +$3,000
+- Recommended tile vendor: Stonewood in Natick
+- Lead time: 6-8 weeks from signed contract
+
+## Follow-ups
+- Schedule walkthrough for Sarah once line-item bid arrives
+- Mike will pull permit on our behalf if we move forward
+
+## Open questions
+- Whether the existing electrical panel can handle the new induction range — Mike flagged uncertainty, said his electrician would need to look
+````
+
+What the example does right: the title is searchable months later, not "call notes." The summary front-loads the headline outcome ($42K, decision pending) instead of recapping the agenda. Key points are grouped by topic, not chronology — even if Mike brought up sink relocation and permits at three different points in the call. Action items have explicit owners and dates pulled from what was actually said. Notable details concentrates the specifics (phone number, prices, vendor referral) so they're easy to find later. The "Open questions" entry is a real unresolved item, not padding to fill the section.
 
 ## Output
 
