@@ -27,6 +27,11 @@
       "name": "planning-photoshoots",
       "source": "./plugins/planning-photoshoots",
       "description": "A conversational photography companion that recommends gear loadouts, styles, and practical tips for a shoot based on goals, location, weather, and owned equipment."
+    },
+    {
+      "name": "spitballing",
+      "source": "./plugins/spitballing",
+      "description": "Switches Claude into a spitballing / thinking-out-loud mode where the user's messages are exploratory musings rather than orders or facts, so Claude pushes back, stress-tests ideas, and follows premises to their extremes instead of implementing them. Use when the user invokes /spitballing or signals they're just thinking out loud."
     }
   ]
 }
