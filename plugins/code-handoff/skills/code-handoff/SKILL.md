@@ -5,29 +5,30 @@ description: Packages the current conversation into a handoff document for a fre
 
 # Code Handoff
 
+## What a handoff is (and isn't)
+
+A handoff transfers knowledge; it does not design the solution. Your job is to capture what the conversation actually established — the goal, the decisions, the constraints, the open questions — so a fresh coding agent starts with the same understanding you have.
+
+It is **not** your job to plan the implementation, invent an approach, pick the files to touch, or prescribe first steps. The coding agent does that with full repo access and far more context than this skill has. Every assumption you bake in is something it then has to either refute (at best) or follow blindly (at worst), so don't bake any in. When in doubt, transfer the fact and let the coding agent decide what to do with it.
+
 ## What to do
 
 1. **Review the full conversation.** Identify:
    - The goal (what's being built, investigated, or decided)
-   - Decisions already made, with brief rationale
+   - Decisions actually reached, with brief rationale — only choices the conversation genuinely settled, not ones you'd infer
    - Approaches considered and rejected, with why
    - Constraints: tech stack, repo or path names, style conventions, team/org factors
    - Open questions the coding agent should be aware of
-   - Any file paths, repo names, library names, commands, or URLs that were mentioned
+   - Any file paths, repo names, library names, commands, or URLs that were actually mentioned
 
 2. **Synthesize, don't transcribe.** The handoff is not a conversation dump. Pull out what's decided and relevant, drop small talk, dead ends that went nowhere, and clarifications that resolved into decisions (just capture the resulting decision).
 
-3. **Infer concrete starting actions.** Based on what was discussed, suggest specific first moves for the new session:
-   - Files or directories to open first (use actual paths if mentioned; otherwise describe what to look for)
-   - `rg` or `grep` patterns to locate relevant code (use identifiers, function names, or strings that came up in the conversation)
-   - Shell commands to orient (`git log`, `ls`, reading a specific config, checking a dependency version)
-   - Docs or library references to consult if a new dependency or API is involved
-
-   Keep the actions tool-agnostic — prefer plain shell commands (`rg`, `git`, `cat`, `ls`) that work in any coding agent's environment rather than commands specific to one agent's toolset.
+3. **Collect references, don't invent them.** List the concrete file paths, identifiers, commands, and URLs that actually came up in the conversation, each with a word on what it is. These are pointers to where relevant things live — not an ordered investigation or an implementation plan. Do not guess at file paths, `rg`/`grep` patterns, "files to open first", or a sequence of steps that weren't discussed; the coding agent will work that out itself with the repo in front of it. If nothing concrete was mentioned, drop the section rather than manufacturing one.
 
 4. **Self-verify before writing.** Run these checks on the draft:
-   - Every Decision MUST have a one-line rationale, not just the decision itself.
-   - Every Starting action MUST reference something specific that came up in the conversation (a real path, a real identifier, a real command). If an action is plausible but unverified, replace it with an honest "investigate X" note or delete it.
+   - Every Decision reflects a choice actually made in the conversation and carries a one-line rationale. If you inferred it or it's really the coding agent's call, cut it.
+   - Every reference actually appeared in the conversation — a real path, a real identifier, a real command. No invented paths, patterns, or commands.
+   - The handoff describes *what was decided*, not *how to implement it*. If a line prescribes an approach or a first step beyond the decisions actually made, cut it — that's the coding agent's job.
    - Thin sections MUST be deleted rather than padded. If there's nothing real to say under "Approaches considered and rejected," the section doesn't appear in the output.
 
 5. **Write the handoff to `/mnt/user-data/outputs/handoff.md`** using the template below.
@@ -61,15 +62,11 @@ description: Packages the current conversation into a handoff document for a fre
 ## Open questions
 - <question the coding agent should keep in mind or resolve early>
 
-## Starting actions
-Concrete first moves for the new session, in order:
+## Relevant references
+Concrete paths, identifiers, and commands that came up in the conversation, each with a note on what it is. Pointers to where things live — not an ordered plan.
 
-1. <action — e.g., `Open src/handlers/channel.ts to understand the existing MCP handler pattern`>
-2. <action — e.g., `rg 'registerChannel' --type ts to find all call sites`>
-3. <action — e.g., `git log --oneline -20 -- src/handlers/ to see recent changes in this area`>
-
-## First task
-<the specific next thing to do after orientation — ideally small and well-defined, not the whole project>
+- `<path or identifier>` — <what it is / why it was mentioned>
+- `<path or identifier>` — <what it is / why it was mentioned>
 
 ---
 *Generated from a mobile investigation session. Paste into a new coding agent session to continue.*
@@ -101,16 +98,12 @@ Production p95 latency crossed 2s last week. Tracing showed the endpoint re-runs
 ## Open questions
 - Should invalidation hook into the content-update pipeline, or is 60s TTL the only staleness bound? Needs product confirmation.
 
-## Starting actions
-1. `cat app/api/search.py` to see the current handler and response shape.
-2. `rg -n '@cached' app/ --type py` to find existing decorator uses and match style.
-3. `cat app/cache/__init__.py` to understand the wrapper's API (serialization, key namespacing).
-
-## First task
-Add `@cached(ttl=60, key_prefix="search:v1")` to the /api/search handler, verify response serialization is correct, and run the existing endpoint tests to confirm no behavioral regression.
+## Relevant references
+- `app/api/search.py` — the /api/search route handler under discussion.
+- `app/cache/` — existing Redis wrapper; uses a `@cached(ttl=...)` decorator worth matching.
 ```
 
-What the example does right: Context stays tight at three sentences instead of recapping the whole discussion. Each Decision carries a one-line rationale rather than standing alone. Starting actions use plain shell (`cat`, `rg`), reference real file paths from the conversation, and progress from orientation toward investigation rather than jumping straight to implementation. The First task is one concrete step, not the whole project. The "Approaches considered and rejected" section is omitted entirely because no real alternatives were discussed — that's the thin-section rule in action.
+What the example does right: Context stays tight at three sentences instead of recapping the whole discussion. Each Decision carries a one-line rationale rather than standing alone. Relevant references point at the real paths that came up and say what they are, without prescribing which to open first or turning them into an investigation script — the coding agent decides that. There's no "First task" dictating the implementation, because *which* decorator call to write and *how* to verify it are the coding agent's job with the repo in front of it, not assumptions to bake in here. The "Approaches considered and rejected" section is omitted entirely because no real alternatives were discussed — that's the thin-section rule in action.
 
 ## Output format
 
