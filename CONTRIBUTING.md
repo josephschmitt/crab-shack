@@ -146,4 +146,4 @@ Publishing a GitHub release triggers [`package-skills.yml`](./.github/workflows/
 
 ## Also worth reading
 
-[`CLAUDE.md`](./CLAUDE.md) has the same layout rules aimed at coding agents working in this repo, plus a section on skill authoring best practices that is worth a skim before you write a `SKILL.md`.
+[`CLAUDE.md`](./CLAUDE.md) is short and points back here for the mechanics, but its skill authoring best practices are worth a skim before you write a `SKILL.md`. [`plugins/CLAUDE.md`](./plugins/CLAUDE.md) covers the voice for a plugin's `README.md`.
