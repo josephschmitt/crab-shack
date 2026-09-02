@@ -10,7 +10,7 @@ That is the one thing worth internalizing before you start: **you write four fil
 |---|---|
 | `plugins/<name>/plugin.json` | **You.** The per-plugin source of truth. |
 | `plugins/<name>/skills/<skill>/SKILL.md` | **You.** The skill itself. No tool ever rewrites this. |
-| `plugins/<name>/README.md` | **You.** See [`plugins/CLAUDE.md`](./plugins/CLAUDE.md) for the voice. |
+| `plugins/<name>/README.md` | **You.** See [`plugins/AGENTS.md`](./plugins/AGENTS.md) for the voice. |
 | `marketplace.yaml` | **You**, but rarely. Repo-level marketplace name, owner, and Codex defaults. |
 | `.claude-plugin/marketplace.json` | Generated |
 | `.cursor-plugin/marketplace.json` | Generated |
@@ -71,7 +71,7 @@ The `description` is what an agent reads to decide whether to load the skill, so
 
 The `description` here is the short marketplace blurb and can differ from the SKILL.md description, which is longer and trigger-heavy. Only the ten fields the Agent Plugins spec permits are allowed, so resist adding `displayName` or anything else; per-client extras belong in `marketplace.yaml` under `overrides`.
 
-**3. Write the README.** [`plugins/CLAUDE.md`](./plugins/CLAUDE.md) covers what belongs in it. For the install section, copy the block from any existing plugin README and substitute the name.
+**3. Write the README.** [`plugins/AGENTS.md`](./plugins/AGENTS.md) covers what belongs in it. For the install section, copy the block from any existing plugin README and substitute the name.
 
 **4. Generate the manifests.**
 
@@ -146,4 +146,4 @@ Publishing a GitHub release triggers [`package-skills.yml`](./.github/workflows/
 
 ## Also worth reading
 
-[`CLAUDE.md`](./CLAUDE.md) is short and points back here for the mechanics, but its skill authoring best practices are worth a skim before you write a `SKILL.md`. [`plugins/CLAUDE.md`](./plugins/CLAUDE.md) covers the voice for a plugin's `README.md`.
+[`AGENTS.md`](./AGENTS.md) is short and points back here for the mechanics, but its skill authoring best practices are worth a skim before you write a `SKILL.md`. [`plugins/AGENTS.md`](./plugins/AGENTS.md) covers the voice for a plugin's `README.md`. Both are also reachable as `CLAUDE.md`, which is a symlink, so harnesses that look for either name find the same file.
