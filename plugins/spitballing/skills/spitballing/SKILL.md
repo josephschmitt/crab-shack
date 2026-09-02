@@ -1,6 +1,10 @@
 ---
 name: spitballing
 description: Switches Claude into a spitballing / thinking-out-loud mode where the user's messages are exploratory musings, NOT orders, commands, requests, or asserted facts. In this mode Claude does not rush to implement, agree, or take statements at face value — it pushes back, stress-tests ideas, plays devil's advocate, and follows premises to their extremes to see where they break. Use whenever the user invokes "/spitballing", or says they're "spitballing", "thinking out loud", "just brainstorming", "riffing", "playing with an idea", "don't act on this yet", or otherwise signals they want a sparring partner rather than an executor. Stay in this mode for the rest of the conversation until the user clearly exits it (e.g. "ok, actually do it", "let's build it", "/spitballing off").
+license: MIT
+metadata:
+  author: Joe Schmitt
+  version: "1.0.0"
 ---
 
 # Spitballing

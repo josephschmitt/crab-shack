@@ -2,41 +2,129 @@
   "name": "joes-crab-shack",
   "owner": {
     "name": "Joe Schmitt",
-    "email": "ai@joe.sh"
+    "email": "ai@joe.sh",
+    "url": "https://github.com/josephschmitt"
   },
   "metadata": {
-    "description": "Joe's personal Claude plugin marketplace"
+    "description": "Joe's personal plugin marketplace"
   },
   "plugins": [
     {
       "name": "call-notes",
       "source": "./plugins/call-notes",
-      "description": "Turns a raw call or meeting transcript into structured, actionable notes — summary, key points, decisions, action items, follow-ups, and notable details. Supports optional scoring templates."
+      "version": "1.0.0",
+      "description": "Turns a raw call or meeting transcript into structured, actionable notes — summary, key points, decisions, action items, follow-ups, and notable details. Supports optional scoring templates.",
+      "author": {
+        "name": "Joe Schmitt",
+        "email": "ai@joe.sh",
+        "url": "https://github.com/josephschmitt"
+      },
+      "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/call-notes",
+      "repository": "https://github.com/josephschmitt/crab-shack",
+      "license": "MIT",
+      "keywords": [
+        "meetings",
+        "transcripts",
+        "notes",
+        "writing"
+      ]
     },
     {
       "name": "code-handoff",
       "source": "./plugins/code-handoff",
-      "description": "Packages the current conversation into a handoff document for a fresh coding agent session."
+      "version": "1.0.0",
+      "description": "Packages the current conversation into a handoff document for a fresh coding agent session.",
+      "author": {
+        "name": "Joe Schmitt",
+        "email": "ai@joe.sh",
+        "url": "https://github.com/josephschmitt"
+      },
+      "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/code-handoff",
+      "repository": "https://github.com/josephschmitt/crab-shack",
+      "license": "MIT",
+      "keywords": [
+        "coding-agents",
+        "handoff",
+        "context",
+        "workflow"
+      ]
     },
     {
       "name": "copy-editor",
       "source": "./plugins/copy-editor",
-      "description": "Takes an editorial pass on existing prose to improve clarity and flow while preserving the author's voice."
+      "version": "1.0.0",
+      "description": "Takes an editorial pass on existing prose to improve clarity and flow while preserving the author's voice.",
+      "author": {
+        "name": "Joe Schmitt",
+        "email": "ai@joe.sh",
+        "url": "https://github.com/josephschmitt"
+      },
+      "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/copy-editor",
+      "repository": "https://github.com/josephschmitt/crab-shack",
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "editing",
+        "prose"
+      ]
     },
     {
       "name": "distill",
       "source": "./plugins/distill",
-      "description": "Distills a conversation or research thread into a durable, impersonal knowledge-base article that keeps only what was actually established, with no outside research unless explicitly requested."
+      "version": "1.0.0",
+      "description": "Distills a conversation or research thread into a durable, impersonal knowledge-base article that keeps only what was actually established, with no outside research unless explicitly requested.",
+      "author": {
+        "name": "Joe Schmitt",
+        "email": "ai@joe.sh",
+        "url": "https://github.com/josephschmitt"
+      },
+      "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/distill",
+      "repository": "https://github.com/josephschmitt/crab-shack",
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "knowledge-base",
+        "notes",
+        "documentation"
+      ]
     },
     {
       "name": "planning-photoshoots",
       "source": "./plugins/planning-photoshoots",
-      "description": "A conversational photography companion that recommends gear loadouts, styles, and practical tips for a shoot based on goals, location, weather, and owned equipment."
+      "version": "1.0.0",
+      "description": "A conversational photography companion that recommends gear loadouts, styles, and practical tips for a shoot based on goals, location, weather, and owned equipment.",
+      "author": {
+        "name": "Joe Schmitt",
+        "email": "ai@joe.sh",
+        "url": "https://github.com/josephschmitt"
+      },
+      "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/planning-photoshoots",
+      "repository": "https://github.com/josephschmitt/crab-shack",
+      "license": "MIT",
+      "keywords": [
+        "photography",
+        "planning",
+        "gear"
+      ]
     },
     {
       "name": "spitballing",
       "source": "./plugins/spitballing",
-      "description": "Switches Claude into a spitballing / thinking-out-loud mode where the user's messages are exploratory musings rather than orders or facts, so Claude pushes back, stress-tests ideas, and follows premises to their extremes instead of implementing them. Use when the user invokes /spitballing or signals they're just thinking out loud."
+      "version": "1.0.0",
+      "description": "Switches Claude into a spitballing / thinking-out-loud mode where the user's messages are exploratory musings rather than orders or facts, so Claude pushes back, stress-tests ideas, and follows premises to their extremes instead of implementing them. Use when the user invokes /spitballing or signals they're just thinking out loud.",
+      "author": {
+        "name": "Joe Schmitt",
+        "email": "ai@joe.sh",
+        "url": "https://github.com/josephschmitt"
+      },
+      "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/spitballing",
+      "repository": "https://github.com/josephschmitt/crab-shack",
+      "license": "MIT",
+      "keywords": [
+        "brainstorming",
+        "critique",
+        "ideation"
+      ]
     }
   ]
 }

@@ -1,6 +1,10 @@
 ---
 name: planning-photoshoots
 description: A conversational photography companion that helps plan shoots by recommending gear loadouts, photographic styles, and practical tips based on goals, location, weather, and owned equipment. Triggers when the user asks about what camera gear to bring, how to photograph a subject or scene, what style to use for specific conditions (rain, golden hour, overcast, harsh sun), or planning a photo walk. Also triggers on phrases like "what lens should I bring", "how should I shoot this", "photo tips for X", "what gear for Y", or casual mentions like "I want to get some good shots while we're there." The skill is conversational and asks questions to understand goals before recommending.
+license: MIT
+metadata:
+  author: Joe Schmitt
+  version: "1.0.0"
 ---
 
 # Planning Photoshoots

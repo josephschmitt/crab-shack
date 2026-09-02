@@ -1,6 +1,10 @@
 ---
 name: code-handoff
 description: Packages the current conversation into a handoff document for a fresh coding agent session (Claude Code, Codex CLI, OpenCode, Gemini CLI, or similar). Used when the user says "handoff", "generate handoff", "create a handoff", "hand this off", "hand off to the agent", "hand off to claude code", "hand off to codex", "hand off to opencode", "prep for the agent", "prep for claude code", "move this to the coding agent", "code handoff", "package this up for the agent", or otherwise signals they're ready to move investigatory work from this chat into a coding session. Runs with zero arguments — everything is pulled from the conversation itself.
+license: MIT
+metadata:
+  author: Joe Schmitt
+  version: "1.0.0"
 ---
 
 # Code Handoff

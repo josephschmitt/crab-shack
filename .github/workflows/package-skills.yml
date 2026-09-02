@@ -20,10 +20,12 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install pyyaml
+        run: pip install pyyaml jsonschema
 
-      - name: Validate skills before packaging
-        run: python3 scripts/validate_skills.py
+      - name: Validate before packaging
+        run: |
+          python3 scripts/validate.py
+          python3 scripts/sync_manifests.py --check
 
       - name: Build per-skill zips
         id: build

@@ -1,0 +1,82 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - "plugins/**"
+      - ".claude-plugin/**"
+      - "marketplace.yaml"
+      - "scripts/**"
+      - ".github/workflows/validate.yml"
+
+jobs:
+  validate:
+    name: Manifests and skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+
+      - name: Validate plugins and skills
+        run: python3 scripts/validate.py
+
+      - name: Check generated manifests are up to date
+        run: python3 scripts/sync_manifests.py --check
+
+  skills-cli:
+    name: skills.sh discovery
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: List skills the way `npx skills add` sees them
+        env:
+          DISABLE_TELEMETRY: "1"
+        run: npx -y skills add . --list | tee skills.txt
+
+      - name: Every skill in plugins/ is discoverable
+        run: |
+          set -euo pipefail
+          status=0
+          for skill_dir in plugins/*/skills/*/; do
+            name="$(basename "$skill_dir")"
+            if ! grep -q -- "$name" skills.txt; then
+              echo "::error::skill '$name' was not discovered by the skills CLI"
+              status=1
+            fi
+          done
+          exit "$status"
+
+  skills-ref:
+    name: Agent Skills reference validator
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install skills-ref
+        run: pip install "git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref"
+
+      - name: Validate each skill
+        run: |
+          set -euo pipefail
+          for skill_dir in plugins/*/skills/*/; do
+            echo "== $skill_dir"
+            skills-ref validate "$skill_dir"
+          done
