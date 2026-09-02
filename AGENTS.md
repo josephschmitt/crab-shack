@@ -1,6 +1,6 @@
 # Repo guidance
 
-This repo publishes plugins to Claude Code, Claude.ai, Codex, Cursor, and any agent that reads [Agent Skills](https://agentskills.io) or [Agent Plugins](https://agent-plugins.org).
+Every plugin here is a portable [Agent Plugins](https://agent-plugins.org) package: `plugin.json` at the plugin root plus `skills/`. Most clients read that directly. Claude Code is the exception and gets generated manifests of its own.
 
 **[`CONTRIBUTING.md`](./CONTRIBUTING.md) is the reference for all of it**: which files are hand-written and which are generated, how to add a plugin, the naming and frontmatter rules, version bumps, and what each validator error means. Read it before adding or restructuring a plugin rather than inferring the layout from neighboring files.
 
@@ -8,7 +8,7 @@ This repo publishes plugins to Claude Code, Claude.ai, Codex, Cursor, and any ag
 
 ## Two rules worth having in context
 
-**Never hand-edit a generated file.** `.claude-plugin/`, `.cursor-plugin/`, `.agents/`, and each plugin's `.claude-plugin/` and `.codex-plugin/` are rendered from `plugins/*/plugin.json` plus `marketplace.yaml`. Change the source, then run:
+**Never hand-edit a generated file.** `.claude-plugin/marketplace.json` and each plugin's `.claude-plugin/plugin.json` are rendered from `plugins/*/plugin.json` plus `marketplace.yaml`. Change the source, then run:
 
 ```
 python3 scripts/sync_manifests.py

@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""Generate the per-client marketplace and plugin manifests.
+"""Generate the Claude Code manifests.
+
+Every plugin is a portable Agent Plugins package already: plugin.json at the
+plugin root plus skills/. Cursor, Codex, Copilot, VS Code, Kiro and the rest of
+the clients listed at https://agent-plugins.org/compatible-clients read that
+directly. Claude Code does not, so it gets generated manifests of its own.
 
 Sources: marketplace.yaml and plugins/<name>/plugin.json.
 
 Generated:
-  .claude-plugin/marketplace.json        Claude Code marketplace
-  .cursor-plugin/marketplace.json        Cursor marketplace (same shape as Claude's)
-  .agents/plugins/marketplace.json       Codex marketplace
+  .claude-plugin/marketplace.json
   plugins/<name>/.claude-plugin/plugin.json
-  plugins/<name>/.codex-plugin/plugin.json
 
 Usage:
   sync_manifests.py            write every generated file
@@ -19,7 +21,6 @@ Usage:
 from __future__ import annotations
 
 import difflib
-import json
 import re
 import sys
 from pathlib import Path
@@ -28,21 +29,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from crabshack import (  # noqa: E402
     CLAUDE_MARKETPLACE,
-    CODEX_MARKETPLACE,
-    CURSOR_MARKETPLACE,
     FRONTMATTER_RE,
     PLUGIN_GENERATED_FILES,
     REPO_ROOT,
     SEMVER_RE,
     Plugin,
-    display_name,
     load_config,
     load_plugins,
     rel,
     render_json,
 )
 
-SHORT_DESCRIPTION_MAX = 100
 PASSTHROUGH_FIELDS = ("version", "description", "author", "homepage", "repository", "license", "keywords")
 
 
@@ -50,30 +47,11 @@ def pick(manifest: dict, *keys: str) -> dict:
     return {key: manifest[key] for key in keys if key in manifest}
 
 
-def plugin_override(cfg: dict, plugin: Plugin, *path: str):
-    node = (cfg.get("overrides") or {}).get(plugin.name) or {}
-    for key in path:
-        if not isinstance(node, dict) or key not in node:
-            return None
-        node = node[key]
-    return node
-
-
-def plugin_display_name(cfg: dict, plugin: Plugin) -> str:
-    return plugin_override(cfg, plugin, "displayName") or display_name(plugin.name)
-
-
-def short_description(description: str) -> str:
-    if len(description) <= SHORT_DESCRIPTION_MAX:
-        return description
-    return description[: SHORT_DESCRIPTION_MAX - 1].rstrip() + "…"
-
-
 def render_claude_marketplace(cfg: dict, plugins: list[Plugin]) -> dict:
     entries = []
     for plugin in plugins:
         entry = {"name": plugin.name, "source": plugin.source}
-        entry.update(pick(plugin.manifest, "description", "version", "author", "homepage", "repository", "license", "keywords"))
+        entry.update(pick(plugin.manifest, *PASSTHROUGH_FIELDS))
         entries.append(entry)
     return {
         "name": cfg["name"],
@@ -83,63 +61,17 @@ def render_claude_marketplace(cfg: dict, plugins: list[Plugin]) -> dict:
     }
 
 
-def render_codex_marketplace(cfg: dict, plugins: list[Plugin]) -> dict:
-    codex_defaults = cfg.get("codex") or {}
-    entries = []
-    for plugin in plugins:
-        entry = {
-            "name": plugin.name,
-            **pick(plugin.manifest, "description"),
-            "source": {"source": "local", "path": plugin.source},
-        }
-        policy = plugin_override(cfg, plugin, "codex", "policy") or codex_defaults.get("policy")
-        category = plugin_override(cfg, plugin, "codex", "category") or codex_defaults.get("category")
-        if policy:
-            entry["policy"] = policy
-        if category:
-            entry["category"] = category
-        entries.append(entry)
-    return {
-        "name": cfg["name"],
-        "interface": {"displayName": cfg["displayName"]},
-        "plugins": entries,
-    }
-
-
 def render_claude_plugin(plugin: Plugin) -> dict:
     return {"name": plugin.name, **pick(plugin.manifest, *PASSTHROUGH_FIELDS)}
-
-
-def render_codex_plugin(cfg: dict, plugin: Plugin) -> dict:
-    manifest = plugin.manifest
-    interface = {"displayName": plugin_display_name(cfg, plugin)}
-    if "description" in manifest:
-        interface["shortDescription"] = short_description(manifest["description"])
-    category = plugin_override(cfg, plugin, "codex", "category") or (cfg.get("codex") or {}).get("category")
-    if category:
-        interface["category"] = category
-    return {
-        "name": plugin.name,
-        **pick(manifest, "version", "description"),
-        "skills": "./skills/",
-        **pick(manifest, "author", "homepage", "repository", "license", "keywords"),
-        "interface": interface,
-    }
 
 
 def render_all(cfg: dict, plugins: list[Plugin]) -> dict[Path, str]:
     """Return {path relative to repo root: file text} for every generated file."""
     plugins = sorted((p for p in plugins if p.manifest is not None), key=lambda p: p.name)
-    claude = render_json(render_claude_marketplace(cfg, plugins))
-    outputs = {
-        CLAUDE_MARKETPLACE: claude,
-        CURSOR_MARKETPLACE: claude,
-        CODEX_MARKETPLACE: render_json(render_codex_marketplace(cfg, plugins)),
-    }
+    outputs = {CLAUDE_MARKETPLACE: render_json(render_claude_marketplace(cfg, plugins))}
     for plugin in plugins:
         plugin_rel = plugin.dir.relative_to(REPO_ROOT)
         outputs[plugin_rel / ".claude-plugin" / "plugin.json"] = render_json(render_claude_plugin(plugin))
-        outputs[plugin_rel / ".codex-plugin" / "plugin.json"] = render_json(render_codex_plugin(cfg, plugin))
     return outputs
 
 

@@ -13,9 +13,7 @@ Every plugin here is a single skill wrapped in an [Agent Plugins](https://agent-
 | Just the skill, no plugin (Claude Code, Cursor, Codex, Copilot, and 50+ others) | `npx skills add josephschmitt/crab-shack --skill <name>` |
 | Claude Code | `/plugin marketplace add josephschmitt/crab-shack` then `/plugin install <name>@joes-crab-shack` |
 | Claude.ai (web or desktop) | Download `<name>.zip` from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then **+** → **Create skill** and upload it |
-| Codex / ChatGPT | `codex plugin marketplace add josephschmitt/crab-shack` then install from the plugin directory |
-| Cursor | Add this repo under **Customize → Plugins**, or clone it and copy `plugins/<name>` into `~/.cursor/plugins/local/` |
-| Any other Agent Plugins client | Point it at `plugins/<name>/` |
+| Cursor, Codex, Copilot, VS Code, Kiro, and every other [Agent Plugins client](https://agent-plugins.org/compatible-clients) | Point it at `plugins/<name>/`. Cursor also loads a copy dropped into `~/.cursor/plugins/local/` |
 
 Browse [skills.sh](https://skills.sh) to see what other people are installing, or run `npx skills add josephschmitt/crab-shack` with no `--skill` flag to pick from a menu.
 
@@ -30,10 +28,9 @@ plugins/<name>/
 ├── plugin.json              Agent Plugins manifest (hand-written, source of truth)
 ├── skills/<name>/SKILL.md   the skill itself (Agent Skills format)
 ├── README.md
-├── .claude-plugin/          generated
-└── .codex-plugin/           generated
+└── .claude-plugin/          generated, Claude Code only
 ```
 
-The marketplace files for Claude Code, Cursor, and Codex are generated from `marketplace.yaml` plus each `plugin.json` by `scripts/sync_manifests.py`.
+That is a portable Agent Plugins package, which is all most clients need. Claude Code is the exception: it reads neither the root `plugin.json` nor a bare `skills/` directory from a repo, so `scripts/sync_manifests.py` generates its marketplace and per-plugin manifests from `marketplace.yaml` plus each `plugin.json`.
 
 Adding a plugin? [`CONTRIBUTING.md`](./CONTRIBUTING.md) walks through it and spells out which files you write versus which ones the sync script generates.

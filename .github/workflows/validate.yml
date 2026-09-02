@@ -7,8 +7,6 @@ on:
     paths:
       - "plugins/**"
       - ".claude-plugin/**"
-      - ".cursor-plugin/**"
-      - ".agents/**"
       - "marketplace.yaml"
       - "scripts/**"
       - ".github/workflows/validate.yml"

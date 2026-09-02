@@ -1,4 +1,4 @@
-# Repo-level source of truth for the generated marketplace manifests.
+# Repo-level source of truth for the generated Claude Code marketplace.
 # Per-plugin metadata lives in plugins/<name>/plugin.json.
 # After editing either, run: python3 scripts/sync_manifests.py
 name: joes-crab-shack
@@ -10,17 +10,3 @@ owner:
   url: https://github.com/josephschmitt
 repository: https://github.com/josephschmitt/crab-shack
 
-# Defaults for the Codex marketplace entries.
-codex:
-  category: Productivity
-  policy:
-    installation: AVAILABLE
-    authentication: ON_INSTALL
-
-# Per-plugin overrides for client-specific fields that have no home in plugin.json.
-# overrides:
-#   planning-photoshoots:
-#     displayName: Photoshoot Planner
-#     codex:
-#       category: Lifestyle
-overrides: {}

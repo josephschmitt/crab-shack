@@ -1,8 +1,8 @@
 # Contributing
 
-Thanks for poking around. This repo publishes plugins to Claude Code, Claude.ai, Codex, Cursor, and any agent that reads [Agent Skills](https://agentskills.io) or [Agent Plugins](https://agent-plugins.org). Each of those consumers wants a manifest in a different place, so most of the JSON in this repo is generated rather than written by hand.
+Thanks for poking around. Every plugin here is a portable [Agent Plugins](https://agent-plugins.org) package, meaning a `plugin.json` at the plugin root and a `skills/` directory beside it. Cursor, Codex, Copilot, VS Code, Kiro and the rest of the [compatible clients](https://agent-plugins.org/compatible-clients) read that layout directly, so there is nothing client-specific to write for them.
 
-That is the one thing worth internalizing before you start: **you write four files, and a script writes the rest.**
+Claude Code is the one exception, since it reads its own manifests instead. Those are generated, which leads to the thing worth internalizing before you start: **you write four files, and a script writes Claude's.**
 
 ## Which files you edit, which are generated
 
@@ -11,12 +11,9 @@ That is the one thing worth internalizing before you start: **you write four fil
 | `plugins/<name>/plugin.json` | **You.** The per-plugin source of truth. |
 | `plugins/<name>/skills/<skill>/SKILL.md` | **You.** The skill itself. No tool ever rewrites this. |
 | `plugins/<name>/README.md` | **You.** See [`plugins/AGENTS.md`](./plugins/AGENTS.md) for the voice. |
-| `marketplace.yaml` | **You**, but rarely. Repo-level marketplace name, owner, and Codex defaults. |
+| `marketplace.yaml` | **You**, but rarely. Repo-level marketplace name and owner for Claude Code. |
 | `.claude-plugin/marketplace.json` | Generated |
-| `.cursor-plugin/marketplace.json` | Generated |
-| `.agents/plugins/marketplace.json` | Generated |
 | `plugins/<name>/.claude-plugin/plugin.json` | Generated |
-| `plugins/<name>/.codex-plugin/plugin.json` | Generated |
 
 Everything in the generated half comes from `plugins/*/plugin.json` plus `marketplace.yaml`, rendered by `scripts/sync_manifests.py`. Editing a generated file by hand does nothing useful, because the next sync overwrites it and CI fails on the difference in the meantime. If a generated file has the wrong contents, fix the source and re-run the sync.
 
@@ -79,7 +76,7 @@ The `description` here is the short marketplace blurb and can differ from the SK
 python3 scripts/sync_manifests.py
 ```
 
-You should see five paths touched: your two new per-plugin manifests, plus updates to the three marketplaces.
+You should see two paths touched: your new `.claude-plugin/plugin.json` and an updated marketplace.
 
 **5. Validate.**
 
@@ -103,7 +100,7 @@ A clean run prints `ok — validated 7 plugin(s), 7 skill(s)`.
 
 ## Why a single skill still gets a plugin wrapper
 
-It's a fair question, since five of the six plugins here are one skill each. Claude Code has no way to install a bare skill from a repository, and Agent Plugins, Codex, and Cursor all fix the skill location at `<plugin>/skills/<name>/`. The wrapper is one extra directory level and it duplicates no content. Anyone who wants only the skill folder can still run `npx skills add josephschmitt/crab-shack --skill <name>` or download the release zip.
+It's a fair question, since five of the six plugins here are one skill each. Claude Code has no way to install a bare skill from a repository, and the Agent Plugins spec fixes the skill location at `<plugin>/skills/<name>/`. The wrapper is one extra directory level and it duplicates no content. Anyone who wants only the skill folder can still run `npx skills add josephschmitt/crab-shack --skill <name>` or download the release zip.
 
 ## Changing an existing plugin
 
@@ -132,7 +129,7 @@ Publishing a GitHub release triggers [`package-skills.yml`](./.github/workflows/
 
 ## Common errors
 
-**`stale: .cursor-plugin/marketplace.json`** and a diff. A source changed and the generated files didn't. Run `python3 scripts/sync_manifests.py`.
+**`stale: .claude-plugin/marketplace.json`** and a diff. A source changed and the generated files didn't. Run `python3 scripts/sync_manifests.py`.
 
 **`plugins/<name>/plugin.json: plugin.json not found`.** You created the plugin directory and skill but skipped step 2.
 

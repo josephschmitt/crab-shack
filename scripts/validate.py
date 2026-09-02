@@ -16,7 +16,7 @@ Per skill (SKILL.md):
 Repo-wide:
 - Plugin and skill names follow ^[a-z0-9]+(-[a-z0-9]+)*$ and are unique.
 - marketplace.yaml parses and carries the fields the generator needs.
-- Every generated manifest matches what scripts/sync_manifests.py would write.
+- The generated Claude Code manifests match what scripts/sync_manifests.py would write.
 - LICENSE exists when any manifest declares a license.
 
 Exits non-zero and prints a report on any error. Warnings never fail the run.
@@ -31,10 +31,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from crabshack import (  # noqa: E402
     CLAUDE_MARKETPLACE,
-    CODEX_MARKETPLACE,
     COMPATIBILITY_MAX,
     CONFIG_PATH,
-    CURSOR_MARKETPLACE,
     DESCRIPTION_MAX,
     MCP_SCHEMA_PATH,
     MCP_SCHEMA_URL,
@@ -62,7 +60,7 @@ MANIFEST_FIELDS = {"$schema", "name", "version", "description", "author", "homep
 AUTHOR_FIELDS = {"name", "email", "url"}
 RESERVED_NAME_TOKENS = {"claude", "anthropic"}
 SKILL_BODY_MAX_LINES = 500
-CONFIG_FIELDS = ("name", "displayName", "description", "owner", "codex")
+CONFIG_FIELDS = ("name", "description", "owner")
 
 
 class Report:
@@ -237,40 +235,24 @@ def load_json(path: Path, report: Report) -> dict | None:
 
 def validate_marketplaces(plugins: list[Plugin], report: Report) -> None:
     on_disk = {p.name for p in plugins}
-
-    for path in (CLAUDE_MARKETPLACE, CURSOR_MARKETPLACE):
-        data = load_json(path, report)
-        if data is None:
+    data = load_json(CLAUDE_MARKETPLACE, report)
+    if data is None:
+        return
+    listed: set[str] = set()
+    for idx, entry in enumerate(data["plugins"]):
+        scope = f"{CLAUDE_MARKETPLACE.as_posix()}[{idx}]"
+        source = entry.get("source") if isinstance(entry, dict) else None
+        if not isinstance(source, str) or not source.startswith("./"):
+            report.error(scope, "`source` must be a relative path starting with `./` (bare paths break `/plugin marketplace add`)")
             continue
-        listed: set[str] = set()
-        for idx, entry in enumerate(data["plugins"]):
-            scope = f"{path.as_posix()}[{idx}]"
-            source = entry.get("source") if isinstance(entry, dict) else None
-            if not isinstance(source, str) or not source.startswith("./"):
-                report.error(scope, "`source` must be a relative path starting with `./` (bare paths break `/plugin marketplace add`)")
-                continue
-            if not (REPO_ROOT / source).is_dir():
-                report.error(scope, f"source directory `{source}` does not exist")
-                continue
-            listed.add(Path(source).name)
-        for name in sorted(on_disk - listed):
-            report.error(path.as_posix(), f"plugins/{name} is not listed")
-        for name in sorted(listed - on_disk):
-            report.error(path.as_posix(), f"lists '{name}' which has no plugins/{name} directory")
-
-    data = load_json(CODEX_MARKETPLACE, report)
-    if data is not None:
-        listed = set()
-        for idx, entry in enumerate(data["plugins"]):
-            scope = f"{CODEX_MARKETPLACE.as_posix()}[{idx}]"
-            source = entry.get("source") if isinstance(entry, dict) else None
-            path_value = source.get("path") if isinstance(source, dict) else None
-            if not isinstance(path_value, str) or not (REPO_ROOT / path_value).is_dir():
-                report.error(scope, "`source.path` must point at an existing plugin directory")
-                continue
-            listed.add(Path(path_value).name)
-        for name in sorted(on_disk ^ listed):
-            report.error(CODEX_MARKETPLACE.as_posix(), f"plugin set differs from plugins/ (offending: {name})")
+        if not (REPO_ROOT / source).is_dir():
+            report.error(scope, f"source directory `{source}` does not exist")
+            continue
+        listed.add(Path(source).name)
+    for name in sorted(on_disk - listed):
+        report.error(CLAUDE_MARKETPLACE.as_posix(), f"plugins/{name} is not listed")
+    for name in sorted(listed - on_disk):
+        report.error(CLAUDE_MARKETPLACE.as_posix(), f"lists '{name}' which has no plugins/{name} directory")
 
 
 def validate_config(report: Report) -> dict | None:
