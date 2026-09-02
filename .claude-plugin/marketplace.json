@@ -24,6 +24,11 @@
       "description": "Takes an editorial pass on existing prose to improve clarity and flow while preserving the author's voice."
     },
     {
+      "name": "distill",
+      "source": "./plugins/distill",
+      "description": "Distills a conversation or research thread into a durable, impersonal knowledge-base article that keeps only what was actually established, with no outside research unless explicitly requested."
+    },
+    {
       "name": "planning-photoshoots",
       "source": "./plugins/planning-photoshoots",
       "description": "A conversational photography companion that recommends gear loadouts, styles, and practical tips for a shoot based on goals, location, weather, and owned equipment."
