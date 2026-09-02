@@ -49,7 +49,7 @@ If you name a destination (a vault, a folder, a file path), the article goes the
 
 ## Triggers
 
-"/distill", "write this up", "turn what we learned into an article", "save this to my knowledge vault", "make this a reference note", "make this something I can reference later".
+"/distill", "write this up", "turn what we learned into an article", "make this a reference note", "make this something I can reference later".
 
 ## Install
 
