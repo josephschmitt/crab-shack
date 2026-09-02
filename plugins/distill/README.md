@@ -1,4 +1,4 @@
-# knowledge-distiller
+# distill
 
 You just spent forty minutes with Claude working out why a backup job was silently skipping one volume, and now you actually understand it. Tomorrow that understanding lives in a scrollback nobody will reread. Asking for "a summary" gets you a recap of the chat ("first we looked at X, then you mentioned Y"), and asking for "an article" gets you a general-purpose blog post padded with things you never discussed.
 
@@ -57,9 +57,9 @@ If you name a destination (a vault, a folder, a file path), the article goes the
 
 ```
 /plugin marketplace add josephschmitt/crab-shack
-/plugin install knowledge-distiller@joes-crab-shack
+/plugin install distill@joes-crab-shack
 ```
 
 ### Claude.ai (web or desktop)
 
-Download [`knowledge-distiller.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/knowledge-distiller.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.
+Download [`distill.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/distill.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.

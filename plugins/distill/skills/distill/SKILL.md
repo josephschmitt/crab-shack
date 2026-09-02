@@ -1,6 +1,6 @@
 ---
-name: knowledge-distiller
-description: Distills a conversation, research thread, or set of discoveries into a durable, impersonal knowledge-base article that keeps only what the conversation actually established. Use when the user invokes /distill or /knowledge-distiller, or says "write this up", "turn what we learned into an article", "save this to my knowledge vault", "make this a reference note", or "make this something I can reference later". It distills rather than expands, adding no outside research or general knowledge unless the user explicitly asks for it.
+name: distill
+description: Distills a conversation, research thread, or set of discoveries into a durable, impersonal knowledge-base article that keeps only what the conversation actually established. Use when the user invokes /distill (or mentions the skill as `$distill` or `@distill` on harnesses that use those), or says "write this up", "turn what we learned into an article", "save this to my knowledge vault", "make this a reference note", or "make this something I can reference later". It distills rather than expands, adding no outside research or general knowledge unless the user explicitly asks for it.
 ---
 
 # Knowledge Distiller
@@ -11,7 +11,7 @@ The goal is **distillation, not expansion**. Produce the article the conversatio
 
 ## Invocation
 
-`/distill` alone means: distill the current conversation using the defaults below. Text after the command scopes that one run:
+`/distill` alone (or the equivalent skill mention on the current harness, such as `$distill` in Codex or `@distill` in ChatGPT) means: distill the current conversation using the defaults below. Text after the command scopes that one run:
 
 ```text
 /distill keep this very short
