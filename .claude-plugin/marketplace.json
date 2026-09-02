@@ -125,6 +125,26 @@
         "critique",
         "ideation"
       ]
+    },
+    {
+      "name": "writing-clearly-and-concisely",
+      "source": "./plugins/writing-clearly-and-concisely",
+      "version": "1.0.0",
+      "description": "Hands the agent William Strunk Jr.'s The Elements of Style (1918) whenever it writes prose a human will read.",
+      "author": {
+        "name": "Jesse Vincent",
+        "url": "https://github.com/obra"
+      },
+      "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/writing-clearly-and-concisely",
+      "repository": "https://github.com/josephschmitt/crab-shack",
+      "license": "Public Domain",
+      "keywords": [
+        "writing",
+        "style",
+        "grammar",
+        "composition",
+        "clarity"
+      ]
     }
   ]
 }
