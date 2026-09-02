@@ -53,6 +53,14 @@ Paste that into a fresh coding session and the next agent has the scope and the 
 
 ## Install
 
+### Just the skill
+
+Works in Claude Code, Cursor, Codex, Copilot, and most other agents. Copies only the skill folder, no plugin wrapper:
+
+```
+npx skills add josephschmitt/crab-shack --skill code-handoff
+```
+
 ### Claude Code
 
 ```
@@ -63,3 +71,15 @@ Paste that into a fresh coding session and the next agent has the scope and the 
 ### Claude.ai (web or desktop)
 
 Download [`code-handoff.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/code-handoff.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.
+
+### Codex / ChatGPT
+
+```
+codex plugin marketplace add josephschmitt/crab-shack
+```
+
+Then install **Code Handoff** from the plugin directory.
+
+### Cursor
+
+Add `josephschmitt/crab-shack` under **Customize → Plugins**, or clone the repo and copy `plugins/code-handoff` into `~/.cursor/plugins/local/`.

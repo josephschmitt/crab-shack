@@ -36,6 +36,14 @@ Works on blog drafts, announcements, launch posts, essays, README intros, cold e
 
 ## Install
 
+### Just the skill
+
+Works in Claude Code, Cursor, Codex, Copilot, and most other agents. Copies only the skill folder, no plugin wrapper:
+
+```
+npx skills add josephschmitt/crab-shack --skill copy-editor
+```
+
 ### Claude Code
 
 ```
@@ -46,3 +54,15 @@ Works on blog drafts, announcements, launch posts, essays, README intros, cold e
 ### Claude.ai (web or desktop)
 
 Download [`copy-editor.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/copy-editor.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.
+
+### Codex / ChatGPT
+
+```
+codex plugin marketplace add josephschmitt/crab-shack
+```
+
+Then install **Copy Editor** from the plugin directory.
+
+### Cursor
+
+Add `josephschmitt/crab-shack` under **Customize → Plugins**, or clone the repo and copy `plugins/copy-editor` into `~/.cursor/plugins/local/`.

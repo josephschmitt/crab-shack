@@ -1,6 +1,10 @@
 ---
 name: call-notes
 description: Turns a raw call or meeting transcript into structured, actionable notes — not a cleaned-up transcript, but actual notes with summary, key points, decisions, action items, follow-ups, and notable details. Triggers when the user pastes a transcript (from iOS call recording, Zoom, FaceTime, Otter, in-person recording, or anywhere else) and asks for "notes", "call notes", "meeting notes", "summary", "write this up", "structure this", "TL;DR this call", "what came out of this", "extract action items", "/call-notes", or otherwise signals they want a structured write-up of a recorded conversation. Also supports an optional template mode — if the user pastes a scorecard, checklist, or structured form alongside the transcript, the skill maps the conversation to that structure instead of the default.
+license: MIT
+metadata:
+  author: Joe Schmitt
+  version: "1.0.0"
 ---
 
 # Call Notes

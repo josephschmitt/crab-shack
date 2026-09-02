@@ -1,6 +1,10 @@
 ---
 name: copy-editor
 description: Takes an editorial pass on existing writing to improve clarity, conciseness, tone, and narrative flow while preserving the author's voice. Functions like a seasoned copy editor with Strunk & White sensibilities — cuts AI "tells", passive-voice overuse, staccato sentences, tricolons, em-dash abuse, and marketing filler. Use this skill any time the user asks to "edit", "tighten", "clean up", "copy edit", "take an editorial pass", "simplify", "polish", "revise", "proofread", "/edit", or "/simplify" on a piece of writing — blog posts, essays, announcements, emails, Slack messages, social posts, docs, or any prose. Also trigger when the user pastes existing text and asks for feedback on style, clarity, or tone, or asks things like "does this sound right?", "is this too wordy?", "can you tighten this?". Default to this skill over generic writing help whenever the input is existing prose being revised rather than a blank-page draft.
+license: MIT
+metadata:
+  author: Joe Schmitt
+  version: "1.0.0"
 ---
 
 # Copy Editor

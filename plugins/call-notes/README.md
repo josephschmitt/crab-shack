@@ -72,6 +72,14 @@ Paste a scoring rubric alongside an interview transcript and the output uses the
 
 ## Install
 
+### Just the skill
+
+Works in Claude Code, Cursor, Codex, Copilot, and most other agents. Copies only the skill folder, no plugin wrapper:
+
+```
+npx skills add josephschmitt/crab-shack --skill call-notes
+```
+
 ### Claude Code
 
 ```
@@ -82,3 +90,15 @@ Paste a scoring rubric alongside an interview transcript and the output uses the
 ### Claude.ai (web or desktop)
 
 Download [`call-notes.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/call-notes.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.
+
+### Codex / ChatGPT
+
+```
+codex plugin marketplace add josephschmitt/crab-shack
+```
+
+Then install **Call Notes** from the plugin directory.
+
+### Cursor
+
+Add `josephschmitt/crab-shack` under **Customize → Plugins**, or clone the repo and copy `plugins/call-notes` into `~/.cursor/plugins/local/`.

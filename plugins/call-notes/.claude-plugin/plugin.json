@@ -1,0 +1,19 @@
+{
+  "name": "call-notes",
+  "version": "1.0.0",
+  "description": "Turns a raw call or meeting transcript into structured, actionable notes — summary, key points, decisions, action items, follow-ups, and notable details. Supports optional scoring templates.",
+  "author": {
+    "name": "Joe Schmitt",
+    "email": "ai@joe.sh",
+    "url": "https://github.com/josephschmitt"
+  },
+  "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/call-notes",
+  "repository": "https://github.com/josephschmitt/crab-shack",
+  "license": "MIT",
+  "keywords": [
+    "meetings",
+    "transcripts",
+    "notes",
+    "writing"
+  ]
+}

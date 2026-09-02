@@ -41,6 +41,14 @@ First time through, it'll ask what's in your bag and verify each lens against re
 
 ## Install
 
+### Just the skill
+
+Works in Claude Code, Cursor, Codex, Copilot, and most other agents. Copies only the skill folder, no plugin wrapper:
+
+```
+npx skills add josephschmitt/crab-shack --skill planning-photoshoots
+```
+
 ### Claude Code
 
 ```
@@ -51,3 +59,15 @@ First time through, it'll ask what's in your bag and verify each lens against re
 ### Claude.ai (web or desktop)
 
 Download [`planning-photoshoots.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/planning-photoshoots.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.
+
+### Codex / ChatGPT
+
+```
+codex plugin marketplace add josephschmitt/crab-shack
+```
+
+Then install **Planning Photoshoots** from the plugin directory.
+
+### Cursor
+
+Add `josephschmitt/crab-shack` under **Customize → Plugins**, or clone the repo and copy `plugins/planning-photoshoots` into `~/.cursor/plugins/local/`.

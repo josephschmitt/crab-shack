@@ -13,7 +13,7 @@ In roughly this order:
 3. **Why you'd use it.** The specific problem it solves or the annoying default it replaces. A short "the naive approach fails because…" framing usually lands better than a benefits list.
 4. **Sample usage.** At least one worked example: a trigger phrase, an input, and a sketch of the output. Show, don't claim. Real examples do more work than three paragraphs of adjectives.
 5. **Triggers.** The natural phrases that invoke the skill, so a reader knows how to use it once installed. A single line is enough.
-6. **Install.** Claude Code and Claude.ai instructions, kept at the bottom where they belong.
+6. **Install.** Kept at the bottom where it belongs. Lead with the skill-only `npx skills add` command, then Claude Code, Claude.ai, Codex, and Cursor. Copy the block from any existing plugin README and substitute the name; the root `README.md` has the canonical wording.
 
 Sections can combine or reorder if the plugin calls for it. The checklist isn't a template — it's a floor.
 

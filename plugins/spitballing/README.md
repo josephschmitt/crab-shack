@@ -27,6 +27,14 @@ It's a sparring partner, not a yes-man and not an executor.
 
 ## Install
 
+### Just the skill
+
+Works in Claude Code, Cursor, Codex, Copilot, and most other agents. Copies only the skill folder, no plugin wrapper:
+
+```
+npx skills add josephschmitt/crab-shack --skill spitballing
+```
+
 ### Claude Code
 
 ```
@@ -37,3 +45,15 @@ It's a sparring partner, not a yes-man and not an executor.
 ### Claude.ai (web or desktop)
 
 Download [`spitballing.zip`](https://github.com/josephschmitt/crab-shack/releases/latest/download/spitballing.zip) from the [latest release](https://github.com/josephschmitt/crab-shack/releases/latest), then in Claude click **+** → **Create skill** and upload the zip.
+
+### Codex / ChatGPT
+
+```
+codex plugin marketplace add josephschmitt/crab-shack
+```
+
+Then install **Spitballing** from the plugin directory.
+
+### Cursor
+
+Add `josephschmitt/crab-shack` under **Customize → Plugins**, or clone the repo and copy `plugins/spitballing` into `~/.cursor/plugins/local/`.

@@ -1,0 +1,18 @@
+{
+  "name": "spitballing",
+  "version": "1.0.0",
+  "description": "Switches Claude into a spitballing / thinking-out-loud mode where the user's messages are exploratory musings rather than orders or facts, so Claude pushes back, stress-tests ideas, and follows premises to their extremes instead of implementing them. Use when the user invokes /spitballing or signals they're just thinking out loud.",
+  "author": {
+    "name": "Joe Schmitt",
+    "email": "ai@joe.sh",
+    "url": "https://github.com/josephschmitt"
+  },
+  "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/spitballing",
+  "repository": "https://github.com/josephschmitt/crab-shack",
+  "license": "MIT",
+  "keywords": [
+    "brainstorming",
+    "critique",
+    "ideation"
+  ]
+}
