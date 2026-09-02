@@ -47,7 +47,7 @@ A short conversation produces a short note. Fidelity beats completeness.
 
 ## Voice
 
-Write impersonal documentation, not a recap of a chat. Never say "we discussed", "you asked", "I recommended", or "in this conversation", and avoid first and second person unless the subject genuinely requires it. State what the source supports directly and confidently, in plain language, with prose for explanation and bullets only where they help scanning. Do not cite the chat itself.
+Write impersonal documentation, not a recap of a chat. Never say "we discussed", "you asked", "I recommended", or "in this conversation", and avoid first and second person unless the subject genuinely requires it. Do not name the user or attribute decisions to them ("Joe decided to use SQLite"); state the decision itself ("The collector uses SQLite"). State what the source supports directly and confidently, in plain language, with prose for explanation and bullets only where they help scanning. Do not cite the chat itself.
 
 ## Shape
 
