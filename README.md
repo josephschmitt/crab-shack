@@ -34,4 +34,6 @@ plugins/<name>/
 └── .codex-plugin/           generated
 ```
 
-The marketplace files for Claude Code, Cursor, and Codex are generated from `marketplace.yaml` plus each `plugin.json` by `scripts/sync_manifests.py`. See [`CLAUDE.md`](./CLAUDE.md) for the authoring workflow.
+The marketplace files for Claude Code, Cursor, and Codex are generated from `marketplace.yaml` plus each `plugin.json` by `scripts/sync_manifests.py`.
+
+Adding a plugin? [`CONTRIBUTING.md`](./CONTRIBUTING.md) walks through it and spells out which files you write versus which ones the sync script generates.
