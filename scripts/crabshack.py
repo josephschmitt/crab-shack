@@ -37,8 +37,8 @@ MCP_SCHEMA_PATH = SCHEMAS_DIR / "agent-plugins" / AGENT_PLUGINS_VERSION / "mcp.s
 CLAUDE_MARKETPLACE = Path(".claude-plugin/marketplace.json")
 PLUGIN_GENERATED_FILES = (Path(".claude-plugin/plugin.json"),)
 
-# Intersection of the Agent Skills, Agent Plugins, Claude Code, and Codex name
-# rules: lowercase alphanumerics separated by single hyphens.
+# Intersection of the Agent Skills, Agent Plugins, and Claude Code name rules:
+# lowercase alphanumerics separated by single hyphens.
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 NAME_MAX = 64
 DESCRIPTION_MAX = 1024
@@ -127,10 +127,6 @@ def load_plugins() -> list[Plugin]:
             plugin.skills.append(skill)
         plugins.append(plugin)
     return plugins
-
-
-def display_name(name: str) -> str:
-    return " ".join(word.capitalize() for word in name.split("-"))
 
 
 def render_json(obj: object) -> str:

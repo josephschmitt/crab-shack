@@ -1,12 +1,9 @@
-# Repo-level source of truth for the generated Claude Code marketplace.
-# Per-plugin metadata lives in plugins/<name>/plugin.json.
-# After editing either, run: python3 scripts/sync_manifests.py
+# Marketplace-level identity for Claude Code. Everything per-plugin lives in
+# plugins/<name>/plugin.json. After editing either, run:
+#   python3 scripts/sync_manifests.py
 name: joes-crab-shack
-displayName: Joe's Crab Shack
 description: Joe's personal plugin marketplace
 owner:
   name: Joe Schmitt
   email: ai@joe.sh
   url: https://github.com/josephschmitt
-repository: https://github.com/josephschmitt/crab-shack
-
