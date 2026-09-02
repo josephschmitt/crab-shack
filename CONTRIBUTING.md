@@ -66,7 +66,7 @@ The `description` is what an agent reads to decide whether to load the skill, so
 }
 ```
 
-The `description` here is the short marketplace blurb and can differ from the SKILL.md description, which is longer and trigger-heavy. Only the ten fields the Agent Plugins spec permits are allowed, so resist adding `displayName` or anything else; per-client extras belong in `marketplace.yaml` under `overrides`.
+The `description` here is the short marketplace blurb and can differ from the SKILL.md description, which is longer and trigger-heavy. Only the ten fields the Agent Plugins spec permits are allowed, so resist adding `displayName` or anything else. The spec sets `additionalProperties: false`, and the validator rejects extras.
 
 **3. Write the README.** [`plugins/AGENTS.md`](./plugins/AGENTS.md) covers what belongs in it. For the install section, copy the block from any existing plugin README and substitute the name.
 
@@ -137,7 +137,7 @@ Publishing a GitHub release triggers [`package-skills.yml`](./.github/workflows/
 
 **`` `metadata.version` is '1.0.1' but plugin.json says '1.0.0' ``.** The two version fields drifted. Use the `bump` subcommand instead of editing one by hand.
 
-**`unknown top-level field `displayName``.** The Agent Plugins schema permits ten top-level fields and nothing else. Client-specific values go in `marketplace.yaml` under `overrides`.
+**`unknown top-level field `displayName``.** The Agent Plugins schema permits ten top-level fields and nothing else. Drop the extra key.
 
 **`` `source` must be a relative path starting with `./` ``.** You hand-edited a marketplace file. Don't; the generator always emits the correct form. A bare path like `plugins/my-plugin` breaks `/plugin marketplace add` for the entire repo.
 
