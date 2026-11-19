@@ -127,6 +127,26 @@
       ]
     },
     {
+      "name": "task-capture",
+      "source": "./plugins/task-capture",
+      "version": "1.0.0",
+      "description": "Turns a Slack thread, email, or chat message into a Linear issue with a clear title, attached links, a suggested project, and a draft to confirm before anything is created.",
+      "author": {
+        "name": "Joe Schmitt",
+        "email": "ai@joe.sh",
+        "url": "https://github.com/josephschmitt"
+      },
+      "homepage": "https://github.com/josephschmitt/crab-shack/tree/main/plugins/task-capture",
+      "repository": "https://github.com/josephschmitt/crab-shack",
+      "license": "MIT",
+      "keywords": [
+        "linear",
+        "tasks",
+        "issues",
+        "productivity"
+      ]
+    },
+    {
       "name": "writing-clearly-and-concisely",
       "source": "./plugins/writing-clearly-and-concisely",
       "version": "1.0.0",
