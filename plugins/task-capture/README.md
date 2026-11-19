@@ -52,9 +52,9 @@ If you don't paste anything, the skill can look at what you were just working on
 
 ## Setup
 
-The skill needs a Linear MCP server connected. It also has a short configuration table at the top of `SKILL.md` for your default work team, personal team, and backlog status. Fill those in once so it doesn't have to ask each time.
+The skill needs a Linear MCP server connected. There's nothing to configure. On first use it reads your teams and statuses from Linear, asks only what it can't work out (usually which team is your personal one), and remembers the answers if your agent has persistent memory. Without memory, it looks them up each time.
 
-Project routing is optional. By default the skill reads your team's active projects from Linear and picks the closest match. If you want hard rules ("anything about billing goes to Payments"), keep them in a private file and the skill will use it.
+Project routing is optional. By default the skill reads your team's active projects from Linear and picks the closest match. If you want a hard rule ("anything about billing goes to Payments"), tell it and it will remember that too.
 
 ## Triggers
 

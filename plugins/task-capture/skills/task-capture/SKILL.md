@@ -11,18 +11,18 @@ metadata:
 
 Turn a request from a conversation (Slack, email, chat, PR comment, etc.) into a well-formed Linear issue.
 
-## Configuration
+## Preferences
 
-Adjust these defaults to match your workspace. Anything not set here should be looked up from Linear (`list_teams`, `list_projects`, `list_issue_statuses`) rather than guessed.
+Look up workspace details from Linear (`list_teams`, `list_projects`, `list_issue_statuses`) rather than guessing them. Remember the user's answers in the agent's persistent memory, if it has one, so they are asked once.
 
-| Setting             | Default                                                                  |
-| ------------------- | ------------------------------------------------------------------------ |
-| Default team        | `<your work team>` for work requests                                     |
-| Personal team       | `<your personal team>` for private, household, or non-work tasks         |
-| Default status      | Your backlog state (e.g. "Backlog" or "Someday")                         |
-| Default assignee    | `me`                                                                     |
-| Default priority    | No priority (0)                                                          |
-| Project routing     | Optional. Keep keyword-to-project rules in a private file, not this one. |
+Store one entry, phrased as a labeled sentence: `User's Linear defaults: work team <X>; personal team <Y>; backlog status <Z>.` Add `Project routing: <keyword> → <project>` only if the user states a hard rule.
+
+- **Nothing stored yet.** Call `list_teams` and `list_issue_statuses`. Infer what you can (a single team is the work team; the state of type backlog is the backlog status). Ask only for what stays ambiguous, such as which team is personal, then store the answer.
+- **Stored.** Use it without re-confirming. The draft is shown before anything is created, so a wrong value gets caught there. If the user corrects a default, update the entry.
+- **No memory available.** Look values up each time and ask only when ambiguous.
+- **Not stored:** one-off choices for a single issue.
+
+Fixed defaults: assignee is the user (`me`), priority is none (0).
 
 ## Trigger phrases
 
@@ -66,11 +66,11 @@ Adjust these defaults to match your workspace. Anything not set here should be l
    - Note any stated deadlines
    - Note who made the request (e.g. "Asked by <person> in #<channel>")
 
-5. **Pick the team.** Use the default work team unless the task is clearly personal, in which case use the personal team.
+5. **Pick the team.** Use the work team unless the task is clearly personal, in which case use the personal team (see Preferences).
 
 6. **Pick the project.** Suggest the best match and say why it fits.
    - Fetch the team's active projects with `list_projects` and match on the task's content.
-   - If the user keeps a routing file (keyword to project), use it.
+   - If the user has stored routing rules (keyword to project), apply them first.
    - Never assign to completed, canceled, or archived projects.
    - If nothing fits, say so and ask: "This doesn't clearly fit an existing project. Should I file it under [closest match], or create a new project?"
    - If it's still unclear, leave it without a project and note that in the description.
